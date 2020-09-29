@@ -1,0 +1,9 @@
+package com.jacaranda;
+
+import java.util.Comparator;
+
+public class CompareToID implements Comparable<Customers>{
+
+	
+
+}

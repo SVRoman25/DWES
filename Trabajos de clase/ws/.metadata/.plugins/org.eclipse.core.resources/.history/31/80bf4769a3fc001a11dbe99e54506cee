@@ -1,0 +1,42 @@
+package com.jacaranda;
+
+import java.nio.file.Path;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = "/public-api")
+public class TestController {
+	
+	@RequestMapping(path = "/prueba", method=RequestMethod.GET)
+	public String pruebas() {
+		
+		return "Prueba correcta";
+	}
+	
+	@GetMapping(path = "/test")
+	public String pruebaTest() {
+		
+		return "Prueba correcta2";
+	}
+	
+	@PostMapping(path = "/testPost")
+	public String pruebaPost(@RequestParam String name) {
+		
+		return ("hola "+name);
+	}
+	
+	@RequestMapping(path = "/testPost2", method=RequestMethod.POST)
+	public String pruebaPost2() {
+		
+		return "Prueba post 2";
+	}
+
+
+}

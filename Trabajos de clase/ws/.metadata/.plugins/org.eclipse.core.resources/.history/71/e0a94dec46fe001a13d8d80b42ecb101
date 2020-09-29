@@ -1,0 +1,14 @@
+package com.jacaranda;
+
+import java.util.Comparator;
+import com.jacaranda.entity.*;
+
+public class CompareToID implements Comparator<Customer>{
+
+	@Override
+	public int compare(Customer cc1, Customer cc2) {
+		
+		return cc1.get;
+	}
+
+}

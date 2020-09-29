@@ -1,0 +1,53 @@
+package com.jacaranda;
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jacaranda.entity.Customer;
+
+
+/**
+ * Controller to manage customer related requests
+ * @author estudiante
+ *
+ */
+
+@RestController
+@RequestMapping(path = "api")
+public class CustomerController {
+	
+	private List<Customer> customers = new ArrayList<>() {/**
+		
+
+	{ //Haciendolo asi inicializas y metes datos, es mas rapido
+			
+		add(new Customer("Ruben", "D", "Sevilla", "12345678", 2));
+		add(new Customer("Samuel", "D", "Sevilla", "22245678", 3));
+		add(new Customer("Marta", "D", "Sevilla", "33345678", 1));
+		add(new Customer("Juan", "D", "Sevilla", "44445678", 5));
+		add(new Customer("Pepe", "D", "Sevilla", "55555678", 4));
+	}};
+
+	@GetMapping(path ="/orden")
+	public List<Customer> getCustomers(){
+		
+		Collections.sort(customers, new CompareToID());
+		
+		return customers;
+	};
+	
+	@GetMapping(path = "/customer")
+	public List<Customer> getCustomer(){
+		
+		return customers;
+	}
+	
+}
+	
+	

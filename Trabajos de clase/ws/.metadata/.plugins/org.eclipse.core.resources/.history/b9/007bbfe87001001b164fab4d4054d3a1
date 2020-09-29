@@ -1,0 +1,152 @@
+package com.jacaranda;
+
+import java.util.ArrayList;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jacaranda.entity.Customer;
+
+
+/**
+ * Controller to manage customer related requests
+ * @author estudiante
+ *
+ */
+
+@RestController
+@RequestMapping(path = "api")
+public class CustomerController {
+	
+	private List<Customer> customers = new ArrayList<>() {{ //Haciendolo asi inicializas y metes datos, es mas rapido
+			
+		add(new Customer("Ruben", "D", "Sevilla", "12345678", 2));
+		add(new Customer("Samuel", "D", "Sevilla", "22245678", 3));
+		add(new Customer("Marta", "D", "Sevilla", "85678", 6));
+		add(new Customer("Marta", "D", "Sevilla", "93378", 8));
+		add(new Customer("Marta", "D", "Sevilla", "3378", 7));
+		add(new Customer("Juan", "D", "Sevilla", "44445678", 5));
+		add(new Customer("Pepe", "D", "Sevilla", "55555678", 4));
+	}};
+
+	@GetMapping(path ="/orden")
+	public List<Customer> getCustomers(){
+
+		Collections.sort(customers, new CompareToID());
+		
+		return customers;
+	};
+	
+	@GetMapping(path = "/customer")
+	public List<Customer> getCustomer(){
+		
+		return customers;
+	}
+	
+	//Para devolver errores personalizados
+	@GetMapping(path = "/customer2")
+	public ResponseEntity<?> getCustome(){
+		
+		customers=null;
+		
+		
+		if(!customers.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(customers);
+			
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bad Request Performed");
+		}
+		
+	}
+	
+	@GetMapping(path = "/leer")
+	public List<Customer> getCusto(@RequestParam String name){
+			
+			List<Customer> nuevaLista = new ArrayList<>();	
+			for(Customer c : customers) {
+				
+				if(c.getName().equalsIgnoreCase(name)) {
+					nuevaLista.add(c);
+				}
+			}
+		
+		
+		return nuevaLista;
+	}
+	
+	
+	@PostMapping("/crear")
+	public ResponseEntity<?> createCustom(@RequestBody Customer sent){
+		
+		boolean existe = false;
+		
+		for(Customer c : customers) {
+			
+			if(c.getDni().equalsIgnoreCase(sent.getDni())) {
+				existe=true;
+			}
+		}
+		
+		if(existe==false) {
+			customers.add(sent);
+			ResponseEntity.status(HttpStatus.CREATED).body(sent);
+			Collections.sort(customers, new CompareToID());
+			return ResponseEntity.status(HttpStatus.OK).body(customers);
+			
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La persona ya existe");
+		}
+		
+		
+	}
+	 
+	
+	@PutMapping(path ="/actualizar")
+	public ResponseEntity<?> updateCustom(@RequestBody Customer sent){
+		
+		boolean existe = false;
+		
+		for(Customer c : customers) {
+			
+			if(c.getDni().equalsIgnoreCase(sent.getDni())) {
+				existe=true;
+			}
+		}
+		
+		if(existe==true) {
+			for(Customer c : customers) {
+				c.setAddress(sent.getAddress());
+				c.setBirthDate(sent.getBirthDate());
+				c.setCity(sent.getCity());
+				c.setCountry(sent.getCountry());
+				c.setName(sent.getName());
+				c.setGender(sent.getGender());
+				c.setMobileNumber(sent.getMobileNumber());
+				c.setSurname(sent.getSurname());
+			}
+			ResponseEntity.status(HttpStatus.CREATED).body(sent);
+			Collections.sort(customers, new CompareToID());
+			return ResponseEntity.status(HttpStatus.OK).body(customers);
+			
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La persona no existe");
+		}
+		
+		
+	}
+	
+}
+	
+	
