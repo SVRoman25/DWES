@@ -11,7 +11,8 @@ import java.time.LocalDate;
  *
  */
 
-public class Customer implements Serializable {
+public class Customer implements Serializable { // se tiene que poner el serializable para que se encapsule  
+											   //y desencapsule manteniendo el formato desde cualquier lado
 	
 	private String name;
 	private String surname;
