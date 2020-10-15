@@ -1,6 +1,6 @@
 package com.jacaranda.entity;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Cliente {
 	

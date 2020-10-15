@@ -2,7 +2,7 @@ package com.jacaranda.entity;
 
 public class Producto {
 	
-	private int id;
+	private  static int ID=0;
 	private String titulo;
 	private Tipo tipo;
 	private Estado estado;
@@ -14,19 +14,19 @@ public class Producto {
 	}
 	
 	
-	public Producto(int id, String titulo, Tipo tipo, Estado estado) {
+	public Producto(String titulo, Tipo tipo, Estado estado) {
 		super();
-		this.id = id;
+		this.ID = ID++;
 		this.titulo = titulo;
 		this.tipo = tipo;
 		this.estado = estado;
 	}
-	public int getId() {
-		return id;
+	
+	
+	public static int getID() {
+		return ID;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -49,7 +49,7 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", titulo=" + titulo + ", tipo=" + tipo + ", estado=" + estado + "]";
+		return "Producto [id=" + ID + ", titulo=" + titulo + ", tipo=" + tipo + ", estado=" + estado + "]";
 	}
 	
 	

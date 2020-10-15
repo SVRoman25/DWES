@@ -1,0 +1,17 @@
+package com.jacaranda;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import com.jacaranda.CustomerController;
+
+@SpringBootTest
+class JacarandaApplicationTests {
+
+	@Test
+	public void test() {
+		assert(true);
+	}
+
+	
+	
+}
