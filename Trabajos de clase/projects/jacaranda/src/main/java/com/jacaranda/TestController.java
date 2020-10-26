@@ -1,6 +1,5 @@
 package com.jacaranda;
 
-
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

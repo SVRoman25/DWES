@@ -2,12 +2,20 @@ package com.jacaranda.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Alquiler {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int numId;
-	private ArrayList<Cliente> cliente;
-	private ArrayList<Producto> producto;
+	
 	private int duracionDiasAlquiler;
 	private boolean devuelto;
 	private Date fechaEntrega; 
@@ -24,8 +32,6 @@ public class Alquiler {
 			Date fechaEntrega, Date fechaDevolucion) {
 		super();
 		this.numId = numId;
-		this.cliente = new ArrayList<Cliente>();
-		this.producto = new ArrayList<Producto>();
 		this.duracionDiasAlquiler = duracionDiasAlquiler;
 		this.devuelto = devuelto;
 		this.fechaEntrega = fechaEntrega;
@@ -67,10 +73,13 @@ public class Alquiler {
 		this.fechaDevolucion = fechaDevolucion;
 	}
 
+	
+
+
 
 	@Override
 	public String toString() {
-		return "Alquiler [numId=" + numId + ", cliente=" + cliente + ", producto=" + producto
+		return "Alquiler [numId=" + numId 
 				+ ", duracionDiasAlquiler=" + duracionDiasAlquiler + ", devuelto=" + devuelto + ", fechaEntrega="
 				+ fechaEntrega + ", fechaDevolucion=" + fechaDevolucion + "]";
 	}

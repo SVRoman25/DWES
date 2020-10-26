@@ -1,8 +1,18 @@
 package com.jacaranda.entity;
 
+import java.util.ArrayList;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Producto {
 	
-	private  static int ID=0;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int ID=0;
 	private String titulo;
 	private Tipo tipo;
 	private Estado estado;
@@ -20,10 +30,11 @@ public class Producto {
 		this.titulo = titulo;
 		this.tipo = tipo;
 		this.estado = estado;
+
 	}
 	
 	
-	public static int getID() {
+	public int getID() {
 		return ID;
 	}
 

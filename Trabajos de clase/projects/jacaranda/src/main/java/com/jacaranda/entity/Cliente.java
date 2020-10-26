@@ -1,34 +1,52 @@
 package com.jacaranda.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Cliente {
 	
-	private  static int ID=0;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	private String nombre;
 	private String apellido;
 	private String dni;
 	private String telefono;
 	private String gmail;
 	
+	
 	public Cliente() {
 		
 	}
 	
-	public Cliente(String nombre, String apellido, String dni, String telefono, String gmail) {
+
+
+	public Cliente(Integer id, String nombre, String apellido, String dni, String telefono, String gmail) {
 		super();
-		this.ID = ID++;
+		this.id=id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.gmail = gmail;
+		
+		
 	}
-	
 
-	public static int getID() {
-		return ID;
+
+
+	public Integer getId() {
+		return id;
 	}
 
 
@@ -39,6 +57,15 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+
+
+	public void setId(Integer id) {
+		this.id= id;
+	}
+
+
 
 	public String getApellido() {
 		return apellido;
@@ -74,7 +101,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + ID+ ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono="
+		return "Cliente [id=" + id+ ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono="
 				+ telefono + ", gmail=" + gmail + "]";
 	}
 	
